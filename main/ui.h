@@ -6,7 +6,8 @@ extern "C" {
 #endif
 
 
-void ui_init(void);
+void lv_example_style_1(void);
+void lv_example_style_2(void);
 
 
 #ifdef __cplusplus

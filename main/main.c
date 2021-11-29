@@ -6,6 +6,7 @@
 #include "esp_spi_flash.h"
 
 #include "led.h"
+#include "ui_task.h"
 #include "ui.h"
 
 
@@ -29,11 +30,11 @@ void app_main(void)
 {
     chip_info_print();
     eye_init();
-    ui_init();
-
+    ui_task_init();
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    lv_example_style_1();
     while (1)
     {
         vTaskDelay(pdMS_TO_TICKS(20));
     }
 }
-
