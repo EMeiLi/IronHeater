@@ -54,11 +54,11 @@ static void guiTask(void *pvParameter)
     esp_timer_create(&periodic_timer_args, &periodic_timer);
     esp_timer_start_periodic(periodic_timer, LV_TICK_PERIOD_MS*1000);
 
-    lv_example_style_2();
+    // lv_example_style_2();
 
     while (1) {
-        /* Delay 1 tick (assumes FreeRTOS tick is 10ms */
-        vTaskDelay(pdMS_TO_TICKS(10));
+        /* Delay 1 tick (assumes FreeRTOS tick is 5ms */
+        vTaskDelay(pdMS_TO_TICKS(5));
 
         /* Try to take the semaphore, call lvgl related function on success */
         if (pdTRUE == xSemaphoreTake(xGuiSemaphore, portMAX_DELAY)) {
