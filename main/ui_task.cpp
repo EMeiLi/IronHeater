@@ -48,7 +48,10 @@ static void guiTask(void *pvParameter)
     /* Create and start a periodic timer interrupt to call lv_tick_inc */
     const esp_timer_create_args_t periodic_timer_args = {
         .callback = &lv_tick_task,
-        .name = "periodic_gui"
+        .arg = NULL,
+        .dispatch_method = ESP_TIMER_TASK,
+        .name = "periodic_gui",
+        .skip_unhandled_events = false
     };
     esp_timer_handle_t periodic_timer;
     esp_timer_create(&periodic_timer_args, &periodic_timer);

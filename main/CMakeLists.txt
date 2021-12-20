@@ -1,5 +1,5 @@
 idf_component_register(
-    SRCS "ui.c" "ui_task.c" "main.c" "led.c"
+    SRCS "ui_task.cpp" "ui.cpp" "main.cpp" "led.cpp"
 
     INCLUDE_DIRS "."
 )

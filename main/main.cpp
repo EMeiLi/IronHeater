@@ -39,7 +39,7 @@ static bool adc_calibration_init(void)
         ESP_LOGW(TAG, "eFuse not burnt, skip software calibration");
     } else if (ret == ESP_OK) {
         cali_enable = true;
-        esp_adc_cal_characterize(ADC_UNIT_1, ADC_EXAMPLE_ATTEN, ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
+        esp_adc_cal_characterize(ADC_UNIT_1, ADC_EXAMPLE_ATTEN, ADC_WIDTH_BIT_12, 0, &adc1_chars);
     } else {
         ESP_LOGE(TAG, "Invalid arg");
     }
@@ -56,7 +56,7 @@ void adcinit(void)
     CALI_ENABLE = adc_calibration_init();
 
     // ADC1 config
-    ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
+    ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
     ESP_ERROR_CHECK(adc1_config_channel_atten(ADC1_EXAMPLE_CHAN0, ADC_EXAMPLE_ATTEN));
 }
 
@@ -78,6 +78,7 @@ void chip_info_print(void)
     /* Print chip information */
     esp_chip_info_t chip_info;
     esp_chip_info(&chip_info);
+    printf("support c++ 0x%ld\n", __cplusplus);
     printf("This is ESP32 chip with %d CPU cores, WiFi%s%s, ",
             chip_info.cores,
             (chip_info.features & CHIP_FEATURE_BT) ? "/BT" : "",
@@ -89,7 +90,7 @@ void chip_info_print(void)
             (chip_info.features & CHIP_FEATURE_EMB_FLASH) ? "embedded" : "external");
 }
 
-void app_main(void)
+extern "C" void app_main(void)
 {
     chip_info_print();
     eye_init();
